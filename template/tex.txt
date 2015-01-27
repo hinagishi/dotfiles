@@ -1,0 +1,7 @@
+\documentclass[a4j]{jarticle}
+
+\usepackage{graphicx}
+
+\begin{document}
+
+\end{document}
