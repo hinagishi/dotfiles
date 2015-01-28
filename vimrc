@@ -11,6 +11,7 @@ if has('vim_starting')
  " Let NeoBundle manage NeoBundle
  " Required:
  NeoBundleFetch 'Shougo/neobundle.vim'
+ let g:neobundle#types#git#default_protocol = 'https'
 
  " My Bundles here:
  NeoBundle 'Shougo/neocomplete.vim' 
@@ -19,13 +20,13 @@ if has('vim_starting')
  NeoBundle 'Shougo/vimproc.vim'
  NeoBundle 'Shougo/neosnippet.vim'
  NeoBundle 'Shougo/neosnippet-snippets'
- NeoBundle 'git://github.com/hinagishi/wombat256.vim.git'
- NeoBundle 'git://github.com/altercation/vim-colors-solarized.git'
- NeoBundle 'git://github.com/Shougo/unite-ssh.git'
- NeoBundle 'git://github.com/Shougo/vimfiler.git'
- NeoBundle 'git://github.com/Shougo/unite-build.git'
- NeoBundle 'git://github.com/ujihisa/neco-look.git'
- NeoBundle 'git://github.com/mattn/emmet-vim'
+ NeoBundle 'https://github.com/hinagishi/wombat256.vim.git'
+ NeoBundle 'https://github.com/altercation/vim-colors-solarized.git'
+ NeoBundle 'https://github.com/Shougo/unite-ssh.git'
+ NeoBundle 'https://github.com/Shougo/vimfiler.git'
+ NeoBundle 'https://github.com/Shougo/unite-build.git'
+ NeoBundle 'https://github.com/ujihisa/neco-look.git'
+ NeoBundle 'https://github.com/mattn/emmet-vim'
  NeoBundle 'https://github.com/tyru/eskk.vim.git'
  NeoBundle 'https://github.com/majutsushi/tagbar.git'
  NeoBundle 'https://github.com/Shougo/unite-outline.git'
@@ -69,8 +70,8 @@ if has('vim_starting')
  set wrap
  set ruler
  set virtualedit+=block
-set cursorcolumn
-set cursorline
+"set cursorcolumn
+"set cursorline
 set textwidth=100
 set pumheight=10
  syntax enable
@@ -178,6 +179,7 @@ map / <Plug>(incsearch-forward)
 map ? <Plug>(incsearch-backward)
 map g/ <Plug>(incsearch-stay)
 
+"template settings
 autocmd BufNewFile *.html 0r $HOME/.vim/template/html.txt
 autocmd BufNewFile *.c 0r $HOME/.vim/template/c.txt
 autocmd BufNewFile *.cpp 0r $HOME/.vim/template/cpp.txt

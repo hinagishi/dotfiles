@@ -98,8 +98,6 @@ then
 	alias ls="gls --color=always"
 fi
 
-alias cdgitroot='git rev-parse --is-inside-work-tree && cd `git rev-parse --show-toplevel`'
-
 
 if [ `uname` = "Darwin" ];
 then
@@ -114,3 +112,8 @@ alias -s {pdf}=preview
 
 export PATH=$PATH:/opt/apache-ant/bin
 export ANT_HOME=/opt/apache-ant
+
+if [ -e $HOME/.zshrc.misc ]
+then
+    source $HOME/.zshrc.misc
+fi
