@@ -1,0 +1,20 @@
+\documentclass[dvipdfmx]{beamer}
+\ifnum 42146=\euc"A4A2
+  \AtBeginShipoutFirst{\special{pdf:tounicode EUC-UCS2}}
+\else
+  \AtBeginShipoutFirst{\special{pdf:tounicode 90ms-RKSJ-UCS2}}
+\fi
+
+\title{タイトル}
+\author{M. KOHANA}
+\institute[Seikei University]{Seikei University\\Department of Computer and Information Science}
+\date{2000/01/01}
+
+\begin{document}
+\frame{\titlepage}
+
+\section{はじめに}
+\begin{frame}{フレームタイトル}
+
+\end{frame}
+\end{document}
