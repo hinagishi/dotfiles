@@ -104,11 +104,11 @@ then
     alias mplayer='open -a "/Applications/MPlayerX.app"'
     alias firefox='open -a "/Applications/Firefox.app"'
     alias preview='open -a "/Applications/Preview.app"'
+    alias -s {pdf}=preview
 fi
 
 alias -s {mp4,avi,wmv,flv}=mplayer
 alias -s {html,htm}=firefox
-alias -s {pdf}=Preview
 
 export PATH=$PATH:/opt/apache-ant/bin
 export ANT_HOME=/opt/apache-ant
