@@ -47,9 +47,6 @@ if has('vim_starting')
  NeoBundleCheck
 
 
- set t_Co=256
- colorscheme wombat256mod
- let g:solarized_termcolors=256
 
  set autoindent
  set autoread
@@ -77,7 +74,6 @@ set pumheight=10
  syntax enable
 
  let g:vimfiler_as_default_explorer = 1
-
 
  "unite.vim
  let g:unite_enable_start_insert=0
@@ -187,3 +183,9 @@ autocmd BufNewFile *.cpp 0r $HOME/.vim/template/cpp.txt
 autocmd BufNewFile *.tex 0r $HOME/.vim/template/slide.tex
 autocmd BufNewFile *.java 0r $HOME/.vim/template/java.txt
 
+
+ set t_Co=256
+ let g:solarized_termcolors=256
+ set background=dark
+ colorscheme solarized
+ "colorscheme wombat256mod

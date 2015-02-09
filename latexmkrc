@@ -5,9 +5,9 @@ $bibtex = 'pbibtex %O %B';
 $dvipdf = 'dvipdfmx %O %S';
 $pdf_mode = 3;
 
-$os = `uname -s`;
-if ($os eq 'Darwin') {
+if ($^O eq 'Darwin') {
     $pdf_previewer = 'open -a preview';
-} elsif ($os eq 'Linux') {
+} elsif ($^O eq "linux") {
     $pdf_previewer = 'evince';
-}
+} 
+
