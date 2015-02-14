@@ -8,7 +8,7 @@ use_scrollbar = false
 use_xim = true
 xim_open_in_startup = true
 #
-bg_color = #333333
+bg_color = #262626
 fg_color = #EEEEEE
 alpha = 200
 brightness = 100
