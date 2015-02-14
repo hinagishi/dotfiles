@@ -107,7 +107,7 @@ then
     alias -s {pdf}=preview
 fi
 
-alias -s {mp4,avi,wmv,flv}=mplayer
+alias -s {mp4,avi,wmv,flv,mkv}=mplayer
 alias -s {html,htm}=firefox
 
 export PATH=$PATH:/opt/apache-ant/bin
