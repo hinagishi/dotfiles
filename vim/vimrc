@@ -23,15 +23,15 @@ NeoBundle 'https://github.com/Shougo/vimfiler.git'
 NeoBundle 'https://github.com/Shougo/unite-build.git'
 NeoBundle 'https://github.com/ujihisa/neco-look.git'
 NeoBundle 'https://github.com/mattn/emmet-vim'
-NeoBundle 'https://github.com/tyru/eskk.vim.git'
+"NeoBundle 'https://github.com/tyru/eskk.vim.git'
 NeoBundle 'https://github.com/majutsushi/tagbar.git'
 NeoBundle 'https://github.com/Shougo/unite-outline.git'
 NeoBundle 'haya14busa/incsearch.vim'
 NeoBundle 'https://github.com/bronson/vim-trailing-whitespace.git'
-NeoBundle 'marijnh/tern_for_vim', {
-\ 'build': {
-\   'others': 'npm install'
-\}}
+"NeoBundle 'marijnh/tern_for_vim', {
+"\ 'build': {
+"\   'others': 'npm install'
+"\}}
 
 call neobundle#end()
 
@@ -61,6 +61,7 @@ set tabstop=4
 set textwidth=100
 set virtualedit+=block
 set wrap
+set completeopt=menuone
 syntax enable
 
 " VimFiler
@@ -128,14 +129,14 @@ smap <expr><TAB> neosnippet#expandable_or_jumpable() ?
 
 "ToggleNumberOptions
 if version >= 703
-nnoremap <silent> <Leader>n :call ToggleNumber()<CR>
-function ToggleNumber()
-if &number
-set relativenumber
-elseif &relativenumber
-set number
-endif
-endfunction
+    nnoremap <silent> <Leader>n :call ToggleNumber()<CR>
+    function ToggleNumber()
+        if &number
+            set relativenumber
+        elseif &relativenumber
+            set number
+        endif
+    endfunction
 endif
 
 
