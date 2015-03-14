@@ -4,6 +4,10 @@ export LANG=ja_JP.UTF-8
 test -s ~/.alias && . ~/.alias || true
 export PATH=/opt/bin:$PATH
 
+if [ -e $HOME/.bashrc.local ]
+then
+    source $HOME/.bashrc.local
+fi
 
 if [ $TERM = "screen" ];
 then
@@ -19,14 +23,10 @@ if [ $TERM = "xterm" ];
 then
     which tmux >& /dev/null
     if [ $? = 0 ];
-    then 
+    then
 	    export TERM=xterm-256color
 	    tmux -2
     fi
 fi
 
 
-if [ -e $HOME/.bashrc.local ]
-then
-    source $HOME/.bashrc.local
-fi

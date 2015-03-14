@@ -18,8 +18,8 @@ compinit
 
 # コマンド履歴
 HISTFILE=~/.zsh_history
-HISTSIZE=10000
-SAVEHIST=10000
+HISTSIZE=100
+SAVEHIST=100
 # ignore duplication command history list
 setopt hist_ignore_dups
 # share command history data
