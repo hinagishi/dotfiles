@@ -19,7 +19,7 @@ NeoBundle 'Shougo/neosnippet-snippets'
 NeoBundle 'https://github.com/hinagishi/wombat256.vim.git'
 NeoBundle 'https://github.com/altercation/vim-colors-solarized.git'
 NeoBundle 'https://github.com/Shougo/unite-ssh.git'
-NeoBundle 'https://github.com/Shougo/vimfiler.git'
+"NeoBundle 'https://github.com/Shougo/vimfiler.git'
 NeoBundle 'https://github.com/Shougo/unite-build.git'
 NeoBundle 'https://github.com/ujihisa/neco-look.git'
 NeoBundle 'https://github.com/mattn/emmet-vim'
@@ -28,6 +28,7 @@ NeoBundle 'https://github.com/majutsushi/tagbar.git'
 NeoBundle 'https://github.com/Shougo/unite-outline.git'
 NeoBundle 'haya14busa/incsearch.vim'
 NeoBundle 'https://github.com/bronson/vim-trailing-whitespace.git'
+NeoBundle 'itchyny/lightline.vim'
 "NeoBundle 'marijnh/tern_for_vim', {
 "\ 'build': {
 "\   'others': 'npm install'
@@ -64,20 +65,17 @@ set wrap
 set completeopt=menuone
 syntax enable
 
-" VimFiler
-let g:vimfiler_as_default_explorer = 1
-nnoremap <silent> <Space>f :VimFiler<CR>
-
 "unite.vim
 let g:unite_enable_start_insert=0
-noremap <silent> <Space>uf :Unite -winheight=15 -buffer-name=file file<CR>
+noremap <silent> <Space>uf :exe ":Unite -winheight=15 -path="
+    \ . GetGitRoot() . " file"<CR>
 noremap <silent> <Space>ub :Unite buffer<CR>
 noremap <silent> <Space>up :Unite process<CR>
 noremap <silent> <Space>um :Unite file_mru<CR>
 noremap <silent> <Space>ur :Unite register<CR>
 noremap <silent> <Space>uo :Unite outline<CR>
 noremap <silent> <Space>ubd :Unite build<CR>
-noremap <silent> <Space>uw :UniteWithBufferDir file<CR>
+noremap <silent> <Space><Space> :UniteWithBufferDir file<CR>
 noremap <silent> <Space>un :Unite file/new<CR>
 au FileType unite nnoremap <silent> <buffer> <ESC><ESC> :q<CR>
 au FileType unite inoremap <silent> <buffer> <ESC><ESC> <ESC>:q<CR>
@@ -90,7 +88,6 @@ if executable('ag')
 endif
 let g:unite_source_grep_max_candidates = 200
 nnoremap <silent> <Space>ug :<C-u>Unite grep -buffer-name=search-buffer<CR>
-nnoremap <silent> <Space>cg :<C-u>Unite grep -buffer-name=search-buffer<CR><C-R><C-W><CR>
 nnoremap <silent> <Space>rg :<C-u>UniteResume search-buffer<CR>
 
 "neocomplete
@@ -165,7 +162,7 @@ autocmd BufNewFile *.java 0r $HOME/.vim/template/java.txt
 
 
 if neobundle#tap('vim-trailing-whitespace')
-    let g:extra_whitespace_ignored_filetypes = ['unite']
+    let g:extra_whitespace_ignored_filetypes = ['unite', 'vimfiler:explorer']
 endif
 
 
@@ -182,4 +179,47 @@ set background=dark
 colorscheme solarized
 "colorscheme wombat256mod
 
+"lightline.vim
+let g:lightline = {
+    \ 'colorscheme': 'solarized_dark',
+    \ 'active' : {
+    \   'left' : [ [ 'mode', 'paste' ],
+    \              [ 'readonly', 'filename', 'filetype', 'modified' ]
+    \            ]
+    \ },
+    \ 'component' : {
+    \   'readonly' : '%{&filetype=="help"?"":&readonly?"x":""}',
+    \   'modified' : '%{&filetype=="help"?"":&modified?"+":&modifiable?"":"-"}'
+    \ },
+    \ 'component_visible_condition' : {
+    \   'readonly' : '(&filetype!="help" && &readonly)',
+    \   'modified' : '(&filetype!="help" && (&modified || &modifiable))'
+    \ },
+    \ 'separator' : { 'left' : '', 'right' : ''},
+    \ 'subseparator' : { 'left' : '|', 'right' : '|'}
+\}
+
+set noshowmode
+let g:unite_force_overwrite_statusline = 0
+let g:vimfiler_force_overwrite_statusline = 0
+
 imap jj <ESC>
+
+if (exists('+colorcolumn'))
+    set colorcolumn=80
+    highlight ColorColumn ctermbg=9
+endif
+
+function GetGitRoot() abort
+    try
+        let l:isgitrepo =
+        \ matchstr(system("git rev-parse --is-inside-work-tree"), "true")
+        if l:isgitrepo == "true"
+            let l:gitroot = system('git rev-parse --show-toplevel')
+            return substitute(l:gitroot, '\(\r\|\n\)\+', '', 'g')
+        else
+            return "."
+        endif
+    catch
+    endtry
+endfunction
