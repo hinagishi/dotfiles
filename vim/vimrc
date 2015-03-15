@@ -23,7 +23,7 @@ NeoBundle 'https://github.com/Shougo/unite-ssh.git'
 NeoBundle 'https://github.com/Shougo/unite-build.git'
 NeoBundle 'https://github.com/ujihisa/neco-look.git'
 NeoBundle 'https://github.com/mattn/emmet-vim'
-"NeoBundle 'https://github.com/tyru/eskk.vim.git'
+NeoBundle 'https://github.com/tyru/eskk.vim.git'
 NeoBundle 'https://github.com/majutsushi/tagbar.git'
 NeoBundle 'https://github.com/Shougo/unite-outline.git'
 NeoBundle 'haya14busa/incsearch.vim'
@@ -69,6 +69,8 @@ syntax enable
 let g:unite_enable_start_insert=0
 noremap <silent> <Space>uf :exe ":Unite -winheight=15 -path="
     \ . GetGitRoot() . " file"<CR>
+noremap <silent> <Space>ut :exe ":Unite -winheight=15 -path="
+    \ . GetGitRoot() . " file -default-action=tabopen"<CR>
 noremap <silent> <Space>ub :Unite buffer<CR>
 noremap <silent> <Space>up :Unite process<CR>
 noremap <silent> <Space>um :Unite file_mru<CR>
@@ -142,10 +144,34 @@ let g:user_emmet_install_global = 0
 autocmd FileType html,css EmmetInstall
 
 "eskk.vim
-"set imdisable
-"let g:eskk#enable_completion = 1
-"imap <C-r> <Plug>(eskk:toggle)
+set imdisable
+let g:eskk#enable_completion = 1
+imap <C-r> <Plug>(eskk:toggle)
 
+let g:eskk#dictionary = {
+            \ 'path': $HOME . "/.vim/skkdic/skk-jisyo",
+            \ 'sorted': 0,
+            \ 'encoding': 'utf-8'
+            \}
+
+let g:eskk#large_dictionary = {
+            \ 'path': $HOME . "/.vim/skkdic/SKK-JISYO.L",
+            \ 'sorted': 1,
+            \ 'encoding': 'euc-jp'
+            \}
+
+autocmd User eskk-initialize-pre call s:eskk_initial_pre()
+function! s:eskk_initial_pre()
+    let t = eskk#table#new('rom_to_hira*', 'rom_to_hira')
+    call t.add_map(',', ',')
+    call t.add_map('.', '.')
+    call eskk#register_mode_table('hira', t)
+
+    let t = eskk#table#new('rom_to_kata*', 'rom_to_kata')
+    call t.add_map(',', ',')
+    call t.add_map('.', '.')
+    call eskk#register_mode_table('kata', t)
+endfunction
 
 "incsearch.vim
 map / <Plug>(incsearch-forward)
@@ -174,30 +200,76 @@ nnoremap <Space>e :e ~/.vimrc<CR>
 nnoremap <silent><Space>E :TagbarToggle<CR>
 
 set t_Co=256
-let g:solarized_termcolors=256
 set background=dark
 colorscheme solarized
-"colorscheme wombat256mod
 
 "lightline.vim
 let g:lightline = {
-    \ 'colorscheme': 'solarized_dark',
-    \ 'active' : {
-    \   'left' : [ [ 'mode', 'paste' ],
-    \              [ 'readonly', 'filename', 'filetype', 'modified' ]
-    \            ]
+    \ 'colorscheme': 'solarized',
+    \ 'mode_map': { 'c': 'NORMAL'},
+    \ 'active': {
+    \   'left': [ ['mode', 'paste'],
+    \           ['fugitive', 'filename', 'filetype'] ],
+    \   'right': [ ['lineinfo'],
+    \              ['percent'],
+    \              ['fileformat', 'fileencoding'] ]
     \ },
-    \ 'component' : {
-    \   'readonly' : '%{&filetype=="help"?"":&readonly?"x":""}',
-    \   'modified' : '%{&filetype=="help"?"":&modified?"+":&modifiable?"":"-"}'
-    \ },
-    \ 'component_visible_condition' : {
-    \   'readonly' : '(&filetype!="help" && &readonly)',
-    \   'modified' : '(&filetype!="help" && (&modified || &modifiable))'
-    \ },
-    \ 'separator' : { 'left' : '', 'right' : ''},
-    \ 'subseparator' : { 'left' : '|', 'right' : '|'}
-\}
+    \ 'component_function': {
+    \   'modified': 'MyModified',
+    \   'readonly': 'MyReadonly',
+    \   'fugitive': 'MyFugitive',
+    \   'filename': 'MyFilename',
+    \   'fileformat': 'MyFileformat',
+    \   'filetype': 'MyFiletype',
+    \   'fileencoding': 'MyFileencoding',
+    \   'mode': 'MyMode'
+    \ }
+    \ }
+
+function! MyModified()
+    return &ft =~ 'help\|vimfiler' ? '' : &modified ? '+' : 
+                \ &modifiable ? '' : '-'
+endfunction
+
+function! MyReadonly()
+    return &ft !~? 'help\|vimfiler' && &readonly ? 'x' : ''
+endfunction
+
+function! MyFilename()
+    return ('' != MyReadonly() ? MyReadonly() . ' ' : '') .
+                \ (&ft == 'vimfiler' ? vimfiler#get_status_string() :
+                \ &ft == 'unite' ? unite#get_status_string() :
+                \ &ft == 'vimshell' ? vimshell#get_status_string() :
+                \ '' != expand('%:t') ? expand('%:t') : '[No Name]') .
+                \ ('' != MyModified() ? ' ' . MyModified() : '')
+endfunction
+
+function! MyFugitive()
+    try
+        if &ft !~? 'vimfiler' && exists('*fugitive#head')
+            return fugitive#head()
+        endif
+    catch
+    endtry
+    return ''
+endfunction
+
+function MyFileformat()
+    return winwidth(0) > 80 ? &fileformat : ''
+endfunction
+
+function! MyFiletype()
+    return winwidth(0) > 80 ? (strlen(&filetype) ? &filetype : 'no ft') : ''
+endfunction
+
+function! MyFileencoding()
+    return winwidth(0) > 80 ? (strlen(&fenc) ? &fenc : &enc) : ''
+endfunction
+
+function! MyMode()
+    return winwidth(0) > 70 ? lightline#mode() : ''
+endfunction
+
 
 set noshowmode
 let g:unite_force_overwrite_statusline = 0
@@ -223,3 +295,9 @@ function GetGitRoot() abort
     catch
     endtry
 endfunction
+
+"tab
+noremap <silent> tt :tabnew<CR>
+noremap <silent> tn gt<CR>
+noremap <silent> tp gT<CR>
+
