@@ -215,8 +215,8 @@ function GetGitRoot() abort
         let l:isgitrepo =
         \ matchstr(system("git rev-parse --is-inside-work-tree"), "true")
         if l:isgitrepo == "true"
-            let l:gitroot = system('git rev-parse --show-toplevel')
-            return substitute(l:gitroot, '\(\r\|\n\)\+', '', 'g')
+            let l:gitroot = system("git rev-parse --show-toplevel")
+            return substitute(l:gitroot, '\(\r\|\n\)\+', "", "g")
         else
             return "."
         endif
