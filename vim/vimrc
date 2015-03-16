@@ -13,7 +13,7 @@ let g:neobundle#types#git#default_protocol = 'https'
 NeoBundle 'Shougo/vimproc.vim'
 NeoBundle 'Shougo/neocomplete.vim'
 NeoBundle 'Shougo/unite.vim'
-NeoBundle 'Shougo/vimshell.vim'
+"NeoBundle 'Shougo/vimshell.vim'
 NeoBundle 'Shougo/neosnippet.vim'
 NeoBundle 'Shougo/neosnippet-snippets'
 NeoBundle 'https://github.com/hinagishi/wombat256.vim.git'
@@ -84,7 +84,8 @@ noremap <silent> <Space>um :Unite file_mru<CR>
 noremap <silent> <Space>ur :Unite register<CR>
 noremap <silent> <Space>uo :Unite outline<CR>
 noremap <silent> <Space>ubd :Unite build<CR>
-noremap <silent> <Space><Space> :UniteWithBufferDir file<CR>
+noremap <silent> <Space><Space> :UniteWithBufferDir file
+            \ -default-action=tabopen<CR>
 noremap <silent> <Space>un :Unite file/new<CR>
 au FileType unite nnoremap <silent> <buffer> <ESC><ESC> :q<CR>
 au FileType unite inoremap <silent> <buffer> <ESC><ESC> <ESC>:q<CR>
@@ -138,9 +139,7 @@ if version >= 703
     nnoremap <silent> <Leader>n :call ToggleNumber()<CR>
     function ToggleNumber()
         if &number
-            set relativenumber
-        elseif &relativenumber
-            set number
+            set relativenumber!
         endif
     endfunction
 endif
@@ -203,9 +202,8 @@ autocmd BufNewFile *.java 0r $HOME/.vim/template/java.txt
 
 
 if neobundle#tap('vim-trailing-whitespace')
-    let g:extra_whitespace_ignored_filetypes = ['unite', 'vimfiler:explorer']
+    let g:extra_whitespace_ignored_filetypes = ['unite']
 endif
-
 
 nnoremap <C-l><C-i> :set list!<CR>
 nnoremap <C-h><C-l> :set hlsearch!<CR>
@@ -240,7 +238,7 @@ let g:lightline = {
     \ }
 
 function! MyModified()
-    return &ft =~ 'help\|vimfiler' ? '' : &modified ? '+' : 
+    return &ft =~ 'help\|vimfiler' ? '' : &modified ? '+' :
                 \ &modifiable ? '' : '-'
 endfunction
 
