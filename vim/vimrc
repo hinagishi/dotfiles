@@ -28,6 +28,7 @@ NeoBundle 'https://github.com/majutsushi/tagbar.git'
 NeoBundle 'https://github.com/Shougo/unite-outline.git'
 NeoBundle 'haya14busa/incsearch.vim'
 NeoBundle 'https://github.com/bronson/vim-trailing-whitespace.git'
+NeoBundle 'https://github.com/w0ng/vim-hybrid.git'
 NeoBundle 'itchyny/lightline.vim'
 "NeoBundle 'marijnh/tern_for_vim', {
 "\ 'build': {
@@ -64,6 +65,12 @@ set virtualedit+=block
 set wrap
 set completeopt=menuone
 syntax enable
+
+set t_Co=256
+set background=dark
+let g:solarized_termcolors=256
+let g:solarized_termtrans = 1
+colorscheme solarized
 
 "unite.vim
 let g:unite_enable_start_insert=0
@@ -154,11 +161,19 @@ let g:eskk#dictionary = {
             \ 'encoding': 'utf-8'
             \}
 
-let g:eskk#large_dictionary = {
-            \ 'path': $HOME . "/.vim/skkdic/SKK-JISYO.L",
-            \ 'sorted': 1,
-            \ 'encoding': 'euc-jp'
-            \}
+if has('mac')
+    let g:eskk#large_dictionary = {
+                \ 'path': $HOME . "/.vim/skkdic/SKK-JISYO.L",
+                \ 'sorted': 1,
+                \ 'encoding': 'euc-jp'
+                \}
+elseif has('unix')
+    let g:eskk#large_dictionary = {
+                \ 'path': $HOME . "/.vim/skkdic/SKK-JISYO.utf.L",
+                \ 'sorted': 1,
+                \ 'encoding': 'utf-8'
+                \}
+endif
 
 autocmd User eskk-initialize-pre call s:eskk_initial_pre()
 function! s:eskk_initial_pre()
@@ -199,9 +214,6 @@ set laststatus=2
 nnoremap <Space>e :e ~/.vimrc<CR>
 nnoremap <silent><Space>E :TagbarToggle<CR>
 
-set t_Co=256
-set background=dark
-colorscheme solarized
 
 "lightline.vim
 let g:lightline = {
@@ -209,7 +221,7 @@ let g:lightline = {
     \ 'mode_map': { 'c': 'NORMAL'},
     \ 'active': {
     \   'left': [ ['mode', 'paste'],
-    \           ['fugitive', 'filename', 'filetype'] ],
+    \           ['fugitive', 'filename', 'filetype', 'eskkmode'] ],
     \   'right': [ ['lineinfo'],
     \              ['percent'],
     \              ['fileformat', 'fileencoding'] ]
@@ -222,7 +234,8 @@ let g:lightline = {
     \   'fileformat': 'MyFileformat',
     \   'filetype': 'MyFiletype',
     \   'fileencoding': 'MyFileencoding',
-    \   'mode': 'MyMode'
+    \   'mode': 'MyMode',
+    \   'eskkmode': 'GetEskkMode'
     \ }
     \ }
 
@@ -270,6 +283,9 @@ function! MyMode()
     return winwidth(0) > 70 ? lightline#mode() : ''
 endfunction
 
+function! GetEskkMode()
+    return eskk#is_enabled() ? eskk#get_mode() : ''
+endfunction
 
 set noshowmode
 let g:unite_force_overwrite_statusline = 0
@@ -279,7 +295,7 @@ imap jj <ESC>
 
 if (exists('+colorcolumn'))
     set colorcolumn=80
-    highlight ColorColumn ctermbg=9
+    highlight ColorColumn ctermbg=0
 endif
 
 function GetGitRoot() abort
