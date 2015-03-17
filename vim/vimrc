@@ -68,11 +68,6 @@ set wrap
 set completeopt=menuone
 syntax enable
 
-set t_Co=256
-set background=dark
-let g:solarized_termcolors=256
-let g:solarized_termtrans = 1
-colorscheme solarized
 
 "unite.vim
 let g:unite_enable_start_insert=0
@@ -338,4 +333,13 @@ endfunction
 noremap <silent> tt :tabnew<CR>
 noremap <silent> tn gt<CR>
 noremap <silent> tp gT<CR>
+
+nnoremap <silent> <Space>gh :GitGutterLineHighlightsToggle<CR>
+
+set t_Co=256
+set background=dark
+let g:solarized_termcolors=256
+let g:solarized_termtrans = 1
+colorscheme solarized
+highlight clear SignColumn
 
