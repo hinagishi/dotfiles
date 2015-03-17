@@ -30,6 +30,8 @@ NeoBundle 'haya14busa/incsearch.vim'
 NeoBundle 'https://github.com/bronson/vim-trailing-whitespace.git'
 NeoBundle 'https://github.com/w0ng/vim-hybrid.git'
 NeoBundle 'itchyny/lightline.vim'
+NeoBundle 'tpope/vim-fugitive'
+NeoBundle 'airblade/vim-gitgutter'
 "NeoBundle 'marijnh/tern_for_vim', {
 "\ 'build': {
 "\   'others': 'npm install'
@@ -219,7 +221,7 @@ let g:lightline = {
     \ 'mode_map': { 'c': 'NORMAL'},
     \ 'active': {
     \   'left': [ ['mode', 'paste'],
-    \           ['fugitive', 'filename', 'filetype', 'eskkmode'] ],
+    \           ['fugitive', 'gitgutter', 'filename', 'filetype', 'eskkmode'] ],
     \   'right': [ ['lineinfo'],
     \              ['percent'],
     \              ['fileformat', 'fileencoding'] ]
@@ -233,7 +235,8 @@ let g:lightline = {
     \   'filetype': 'MyFiletype',
     \   'fileencoding': 'MyFileencoding',
     \   'mode': 'MyMode',
-    \   'eskkmode': 'GetEskkMode'
+    \   'eskkmode': 'GetEskkMode',
+    \   'gitgutter': 'MyGitGutter'
     \ }
     \ }
 
@@ -283,6 +286,27 @@ endfunction
 
 function! GetEskkMode()
     return eskk#is_enabled() ? eskk#get_mode() : ''
+endfunction
+
+function! MyGitGutter()
+  if ! exists('*GitGutterGetHunkSummary')
+        \ || ! get(g:, 'gitgutter_enabled', 0)
+        \ || winwidth('.') <= 90
+    return ''
+  endif
+  let symbols = [
+        \ g:gitgutter_sign_added . ' ',
+        \ g:gitgutter_sign_modified . ' ',
+        \ g:gitgutter_sign_removed . ' '
+        \ ]
+  let hunks = GitGutterGetHunkSummary()
+  let ret = []
+  for i in [0, 1, 2]
+    if hunks[i] > 0
+      call add(ret, symbols[i] . hunks[i])
+    endif
+  endfor
+  return join(ret, ' ')
 endfunction
 
 set noshowmode
