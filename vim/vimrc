@@ -32,6 +32,8 @@ NeoBundle 'https://github.com/w0ng/vim-hybrid.git'
 NeoBundle 'itchyny/lightline.vim'
 NeoBundle 'tpope/vim-fugitive'
 NeoBundle 'airblade/vim-gitgutter'
+NeoBundle 'tomtom/tcomment_vim'
+NeoBundle 'nathanaelkane/vim-indent-guides'
 "NeoBundle 'marijnh/tern_for_vim', {
 "\ 'build': {
 "\   'others': 'npm install'
@@ -336,10 +338,13 @@ noremap <silent> tp gT<CR>
 
 nnoremap <silent> <Space>gh :GitGutterLineHighlightsToggle<CR>
 
+let g:indent_guides_enable_on_vim_startup = 1
+
 set t_Co=256
 set background=dark
 let g:solarized_termcolors=256
 let g:solarized_termtrans = 1
 colorscheme solarized
 highlight clear SignColumn
+
 
