@@ -121,6 +121,7 @@ inoremap <expr><BS>  neocomplete#smart_close_popup() . '<BS>'
 inoremap <expr><C-y> neocomplete#close_popup()
 inoremap <expr><C-l> neocomplete#complete_common_string()
 
+
 "neosnippet
 imap <C-k> <Plug>(neosnippet_expand_or_jump)
 smap <C-k> <Plug>(neosnippet_expand_or_jump)
@@ -347,4 +348,6 @@ let g:solarized_termtrans = 1
 colorscheme solarized
 highlight clear SignColumn
 
-
+autocmd FileType plaintex setlocal filetype=tex
+autocmd Bufnewfile,Bufread *.md setlocal filetype=markdown
+autocmd BufNewFile,BufRead *.mkd setlocal filetype=markdown
