@@ -267,15 +267,15 @@ function! MyFugitive()
 endfunction
 
 function MyFileformat()
-    return winwidth(0) > 80 ? &fileformat : ''
+    return winwidth(0) > 70 ? &fileformat : ''
 endfunction
 
 function! MyFiletype()
-    return winwidth(0) > 80 ? (strlen(&filetype) ? &filetype : 'no ft') : ''
+    return winwidth(0) > 70 ? (strlen(&filetype) ? &filetype : 'no ft') : ''
 endfunction
 
 function! MyFileencoding()
-    return winwidth(0) > 80 ? (strlen(&fenc) ? &fenc : &enc) : ''
+    return winwidth(0) > 70 ? (strlen(&fenc) ? &fenc : &enc) : ''
 endfunction
 
 function! MyMode()
@@ -289,7 +289,7 @@ endfunction
 function! MyGitGutter()
   if ! exists('*GitGutterGetHunkSummary')
         \ || ! get(g:, 'gitgutter_enabled', 0)
-        \ || winwidth('.') <= 90
+        \ || winwidth('.') <= 70
     return ''
   endif
   let symbols = [
