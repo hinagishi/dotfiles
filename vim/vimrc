@@ -126,14 +126,6 @@ inoremap <expr><C-l> neocomplete#complete_common_string()
 imap <C-k> <Plug>(neosnippet_expand_or_jump)
 smap <C-k> <Plug>(neosnippet_expand_or_jump)
 
-"supertab like snippets behavior
-imap <expr><TAB> neosnippet#expandable_or_jumpable() ?
-    \ "\<Plug>(neosnippet_expand_or_jump)"
-    \: pumvisible() ? "\<C-n>" : "\<TAB>"
-smap <expr><TAB> neosnippet#expandable_or_jumpable() ?
-    \ "\<Plug>(neosnippet_expand_or_jump)"
-    \: "\<TAB>"
-
 "ToggleNumberOptions
 if version >= 703
     nnoremap <silent> <Leader>n :call ToggleNumber()<CR>
@@ -308,6 +300,13 @@ function! MyGitGutter()
 endfunction
 
 set noshowmode
+try
+      set shortmess+=c
+catch /^Vim\%((\a\+)\)\=:E539: Illegal character/
+    autocmd MyAutoCmd VimEnter *
+            \ highlight ModeMsg guifg=bg guibg=bg |
+            \ highlight Question guifg=bg guibg=bg
+endtry
 let g:unite_force_overwrite_statusline = 0
 let g:vimfiler_force_overwrite_statusline = 0
 
