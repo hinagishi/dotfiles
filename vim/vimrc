@@ -127,7 +127,7 @@ imap <C-k> <Plug>(neosnippet_expand_or_jump)
 smap <C-k> <Plug>(neosnippet_expand_or_jump)
 
 "ToggleNumberOptions
-if version >= 703
+if v:version >= 703
     nnoremap <silent> <Leader>n :call ToggleNumber()<CR>
     function ToggleNumber()
         if &number
@@ -147,20 +147,20 @@ let g:eskk#enable_completion = 1
 imap <C-r> <Plug>(eskk:toggle)
 
 let g:eskk#dictionary = {
-            \ 'path': $HOME . "/.vim/skkdic/skk-jisyo",
+            \ 'path': $HOME . '/.vim/skkdic/skk-jisyo',
             \ 'sorted': 0,
             \ 'encoding': 'utf-8'
             \}
 
 if has('mac')
     let g:eskk#large_dictionary = {
-                \ 'path': $HOME . "/.vim/skkdic/SKK-JISYO.L",
+                \ 'path': $HOME . '/.vim/skkdic/SKK-JISYO.L',
                 \ 'sorted': 1,
                 \ 'encoding': 'euc-jp'
                 \}
 elseif has('unix')
     let g:eskk#large_dictionary = {
-                \ 'path': $HOME . "/.vim/skkdic/SKK-JISYO.utf.L",
+                \ 'path': $HOME . '/.vim/skkdic/SKK-JISYO.utf.L',
                 \ 'sorted': 1,
                 \ 'encoding': 'utf-8'
                 \}
@@ -320,12 +320,12 @@ endif
 function GetGitRoot() abort
     try
         let l:isgitrepo =
-        \ matchstr(system("git rev-parse --is-inside-work-tree"), "true")
-        if l:isgitrepo == "true"
-            let l:gitroot = system("git rev-parse --show-toplevel")
-            return substitute(l:gitroot, '\(\r\|\n\)\+', "", "g")
+        \ matchstr(system('git rev-parse --is-inside-work-tree'), 'true')
+        if l:isgitrepo == 'true'
+            let l:gitroot = system('git rev-parse --show-toplevel')
+            return substitute(l:gitroot, '\(\r\|\n\)\+', '', 'g')
         else
-            return "."
+            return '.'
         endif
     catch
     endtry
