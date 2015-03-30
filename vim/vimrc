@@ -33,6 +33,10 @@ NeoBundle 'itchyny/lightline.vim'
 NeoBundle 'tpope/vim-fugitive'
 NeoBundle 'airblade/vim-gitgutter'
 NeoBundle 'tomtom/tcomment_vim'
+NeoBundle 'https://github.com/mattn/webapi-vim.git'
+NeoBundle 'https://github.com/basyura/twibill.vim.git'
+NeoBundle 'https://github.com/tyru/open-browser.vim.git'
+NeoBundle 'https://github.com/basyura/TweetVim.git'
 NeoBundle 'nathanaelkane/vim-indent-guides'
 "NeoBundle 'marijnh/tern_for_vim', {
 "\ 'build': {
@@ -338,7 +342,7 @@ noremap <silent> tp gT<CR>
 
 nnoremap <silent> <Space>gh :GitGutterLineHighlightsToggle<CR>
 
-let g:indent_guides_enable_on_vim_startup = 1
+"let g:indent_guides_enable_on_vim_startup = 1
 
 set t_Co=256
 set background=dark
@@ -346,6 +350,12 @@ let g:solarized_termcolors=256
 let g:solarized_termtrans = 1
 colorscheme solarized
 highlight clear SignColumn
+
+"tweetvim
+nnoremap <silent> <Space>tl :TweetVimUserStream<CR>
+nnoremap <silent> <Space>tp :TweetVimCommandSay<CR>
+nnoremap <silent> <Space>tm :TweetVimMentions<CR>
+nnoremap <silent> <Space>ta :Unite tweetvim/account<CR>
 
 autocmd FileType plaintex setlocal filetype=tex
 autocmd Bufnewfile,Bufread *.md setlocal filetype=markdown
