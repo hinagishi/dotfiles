@@ -373,4 +373,4 @@ autocmd FileType plaintex setlocal filetype=tex
 autocmd Bufnewfile,Bufread *.md setlocal filetype=markdown
 autocmd BufNewFile,BufRead *.mkd setlocal filetype=markdown
 
-set fileencodings=iso-2022-jp,cp932,sjis,euc-jp,utf-8
+set fileencodings=utf-8,iso-2022-jp,cp932,sjis,euc-jp
