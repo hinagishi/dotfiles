@@ -101,6 +101,7 @@ noremap <silent> <Space>ubd :Unite build<CR>
 noremap <silent> <Space><Space> :UniteWithBufferDir file
             \ -default-action=tabopen<CR>
 noremap <silent> <Space>un :Unite file/new<CR>
+noremap <silent> <Space>uw :UniteWithBufferDir file<CR>
 au FileType unite nnoremap <silent> <buffer> <ESC><ESC> :q<CR>
 au FileType unite inoremap <silent> <buffer> <ESC><ESC> <ESC>:q<CR>
 
