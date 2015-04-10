@@ -33,7 +33,6 @@ NeoBundle 'https://github.com/majutsushi/tagbar.git'
 NeoBundle 'https://github.com/Shougo/unite-outline.git'
 NeoBundle 'haya14busa/incsearch.vim'
 NeoBundle 'https://github.com/bronson/vim-trailing-whitespace.git'
-NeoBundle 'https://github.com/w0ng/vim-hybrid.git'
 NeoBundle 'itchyny/lightline.vim'
 NeoBundle 'tpope/vim-fugitive'
 NeoBundle 'airblade/vim-gitgutter'
@@ -44,8 +43,12 @@ NeoBundle 'https://github.com/tyru/open-browser.vim.git'
 NeoBundle 'https://github.com/basyura/TweetVim.git'
 NeoBundle 'https://github.com/vim-scripts/gtags.vim.git'
 NeoBundle 'nathanaelkane/vim-indent-guides'
-NeoBundle 'https://github.com/davidhalter/jedi-vim.git'
-NeoBundle 'https://github.com/nvie/vim-flake8.git'
+NeoBundle 'https://github.com/davidhalter/jedi-vim.git', {
+            \   "autoload": { "filetypes" : ["python"]}
+            \}
+NeoBundle 'https://github.com/nvie/vim-flake8.git', {
+            \   "autoload": { "filetypes" : ["python"]}
+            \}
 "NeoBundle 'marijnh/tern_for_vim', {
 "\ 'build': {
 "\   'others': 'npm install'
