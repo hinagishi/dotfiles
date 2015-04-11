@@ -160,7 +160,7 @@ autocmd FileType html,css EmmetInstall
 "eskk.vim
 set imdisable
 let g:eskk#enable_completion = 1
-imap <C-r> <Plug>(eskk:toggle)
+imap <C-o> <Plug>(eskk:toggle)
 
 let g:eskk#dictionary = {
             \ 'path': $HOME . '/.vim/skkdic/skk-jisyo',
