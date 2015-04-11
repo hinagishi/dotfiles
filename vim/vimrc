@@ -247,21 +247,21 @@ let g:lightline = {
     \ }
 
 function! MyModified()
-    return &ft =~ 'help\|vimfiler' ? '' : &modified ? '+' :
+    return &ft =~? 'help\|vimfiler' ? '' : &modified ? '+' :
                 \ &modifiable ? '' : '-'
 endfunction
 
 function! MyReadonly()
-    return &ft !~? 'help\|vimfiler' && &readonly ? 'x' : ''
+    return &ft !=? 'help\|vimfiler' && &readonly ? 'x' : ''
 endfunction
 
 function! MyFilename()
-    return ('' != MyReadonly() ? MyReadonly() . ' ' : '') .
-                \ (&ft == 'vimfiler' ? vimfiler#get_status_string() :
-                \ &ft == 'unite' ? unite#get_status_string() :
-                \ &ft == 'vimshell' ? vimshell#get_status_string() :
-                \ '' != expand('%:t') ? expand('%:t') : '[No Name]') .
-                \ ('' != MyModified() ? ' ' . MyModified() : '')
+    return ('' !=? MyReadonly() ? MyReadonly() . ' ' : '') .
+                \ (&ft ==? 'vimfiler' ? vimfiler#get_status_string() :
+                \ &ft ==? 'unite' ? unite#get_status_string() :
+                \ &ft ==? 'vimshell' ? vimshell#get_status_string() :
+                \ '' !=? expand('%:t') ? expand('%:t') : '[No Name]') .
+                \ ('' !=? MyModified() ? ' ' . MyModified() : '')
 endfunction
 
 function! MyFugitive()
@@ -333,7 +333,7 @@ function GetGitRoot() abort
     try
         let l:isgitrepo =
         \ matchstr(system('git rev-parse --is-inside-work-tree'), 'true')
-        if l:isgitrepo == 'true'
+        if l:isgitrepo ==? 'true'
             let l:gitroot = system('git rev-parse --show-toplevel')
             return substitute(l:gitroot, '\(\r\|\n\)\+', '', 'g')
         else

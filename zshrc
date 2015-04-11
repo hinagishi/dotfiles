@@ -113,6 +113,9 @@ alias -s {html,htm}=firefox
 export PATH=$PATH:/opt/apache-ant/bin
 export ANT_HOME=/opt/apache-ant
 
+if which pyenv > /dev/null; then eval "$(pyenv init -)"; fi
+export PYENV_ROOT=$HOME/.pyenv
+
 if [ -e $HOME/.zshrc.misc ]
 then
     source $HOME/.zshrc.misc
