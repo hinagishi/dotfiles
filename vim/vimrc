@@ -1,6 +1,5 @@
 " NeoBundle Setting
 if has('vim_starting')
-    set nocompatible
     set runtimepath+=~/.vim/bundle/neobundle.vim/
 endif
 
@@ -102,8 +101,11 @@ noremap <silent> <Space><Space> :UniteWithBufferDir file
             \ -default-action=tabopen<CR>
 noremap <silent> <Space>un :Unite file/new<CR>
 noremap <silent> <Space>uw :UniteWithBufferDir file<CR>
-au FileType unite nnoremap <silent> <buffer> <ESC><ESC> :q<CR>
-au FileType unite inoremap <silent> <buffer> <ESC><ESC> <ESC>:q<CR>
+augroup unite
+    autocmd!
+    autocmd FileType unite nnoremap <silent> <buffer> <ESC><ESC> :q<CR>
+    autocmd FileType unite inoremap <silent> <buffer> <ESC><ESC> <ESC>:q<CR>
+augroup END
 
 "Unite grep
 if executable('ag')
@@ -155,7 +157,10 @@ endif
 
 "emmet-vim (for zen-coding)
 let g:user_emmet_install_global = 0
-autocmd FileType html,css EmmetInstall
+augroup emmet
+    autocmd!
+    autocmd FileType html,css EmmetInstall
+augroup END
 
 "eskk.vim
 set imdisable
@@ -182,7 +187,10 @@ elseif has('unix')
                 \}
 endif
 
-autocmd User eskk-initialize-pre call s:eskk_initial_pre()
+augroup eskk
+    autocmd!
+    autocmd User eskk-initialize-pre call s:eskk_initial_pre()
+augroup END
 function! s:eskk_initial_pre()
     let t = eskk#table#new('rom_to_hira*', 'rom_to_hira')
     call t.add_map(',', ',')
@@ -201,12 +209,15 @@ map ? <Plug>(incsearch-backward)
 map g/ <Plug>(incsearch-stay)
 
 "template settings
-autocmd BufNewFile *.html 0r $HOME/.vim/template/html.txt
-autocmd BufNewFile *.c 0r $HOME/.vim/template/c.txt
-autocmd BufNewFile *.cpp 0r $HOME/.vim/template/cpp.txt
-"autocmd BufNewFile *.tex 0r $HOME/.vim/template/report.tex
-autocmd BufNewFile *.tex 0r $HOME/.vim/template/slide.tex
-autocmd BufNewFile *.java 0r $HOME/.vim/template/java.txt
+augroup template
+    autocmd!
+    autocmd BufNewFile *.html 0r $HOME/.vim/template/html.txt
+    autocmd BufNewFile *.c 0r $HOME/.vim/template/c.txt
+    autocmd BufNewFile *.cpp 0r $HOME/.vim/template/cpp.txt
+    "autocmd BufNewFile *.tex 0r $HOME/.vim/template/report.tex
+    autocmd BufNewFile *.tex 0r $HOME/.vim/template/slide.tex
+    autocmd BufNewFile *.java 0r $HOME/.vim/template/java.txt
+augroup END
 
 
 if neobundle#tap('vim-trailing-whitespace')
@@ -355,6 +366,21 @@ nnoremap <silent> <Space>gh :GitGutterLineHighlightsToggle<CR>
 "flack8
 nnoremap <silent> <Leader>c :call Flake8()<CR>
 
+augroup python
+    autocmd!
+    autocmd FileType python setlocal completeopt-=preview
+    autocmd FileType python setlocal omnifunc=jedi#completions
+augroup END
+
+let g:jedi#completions_enabled = 0
+let g:jedi#auto_vim_configuration = 0
+
+if !exists('g:neocomplete#force_omni_input_patterns')
+    let g:neocomplete#force_omni_input_patterns = {}
+endif
+
+let g:neocomplete#force_omni_input_patterns.python = '\h\w*\|[^. \t]\.\w*'
+
 set t_Co=256
 set background=dark
 let g:solarized_termcolors=256
@@ -373,8 +399,15 @@ nnoremap <silent> <Space>tp :TweetVimCommandSay<CR>
 nnoremap <silent> <Space>tm :TweetVimMentions<CR>
 nnoremap <silent> <Space>ta :Unite tweetvim/account<CR>
 
-autocmd FileType plaintex setlocal filetype=tex
-autocmd Bufnewfile,Bufread *.md setlocal filetype=markdown
-autocmd BufNewFile,BufRead *.mkd setlocal filetype=markdown
+augroup latex
+    autocmd!
+    autocmd FileType plaintex setlocal filetype=tex
+augroup END
+
+augroup md
+    autocmd!
+    autocmd Bufnewfile,Bufread *.md setlocal filetype=markdown
+    autocmd BufNewFile,BufRead *.mkd setlocal filetype=markdown
+augroup END
 
 set fileencodings=utf-8,iso-2022-jp,cp932,sjis,euc-jp
