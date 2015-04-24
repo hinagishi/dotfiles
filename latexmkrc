@@ -9,5 +9,5 @@ if ($^O eq 'darwin') {
     $pdf_previewer = 'open -a skim';
 } elsif ($^O eq "linux") {
     $pdf_previewer = 'evince';
-} 
+}
 
