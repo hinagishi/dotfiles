@@ -93,10 +93,7 @@ then
 	alias vim="/usr/local/bin/vim"
 fi
 
-if [ -f /usr/local/bin/gls ]
-then
-	alias ls="gls --color=always"
-fi
+alias ls="ls --color=always"
 
 
 if [ `uname` = "Darwin" ];
