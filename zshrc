@@ -93,7 +93,10 @@ then
 	alias vim="/usr/local/bin/vim"
 fi
 
-alias ls="ls --color=always"
+if [ `uname` = "Linux" ];
+then
+    alias ls="ls --color=always"
+fi
 
 
 if [ `uname` = "Darwin" ];
@@ -102,6 +105,7 @@ then
     alias firefox='open -a "/Applications/Firefox.app"'
     alias preview='open -a "/Applications/Preview.app"'
     alias -s {pdf}=preview
+    alias ls="ls -G"
 fi
 
 alias -s {mp4,avi,wmv,flv,mkv}=mplayer
