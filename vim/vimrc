@@ -424,6 +424,12 @@ augroup python
     autocmd FileType python setlocal omnifunc=jedi#completions
 augroup END
 
+augroup html
+    autocmd!
+    autocmd FileType html setlocal tabstop=2
+    autocmd FileType html setlocal shiftwidth=2
+augroup END
+
 augroup golang
     autocmd!
     autocmd FileType go setlocal noexpandtab
