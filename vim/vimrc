@@ -432,6 +432,8 @@ augroup END
 
 augroup golang
     autocmd!
+    set rtp+=$GOROOT/misc/vim
+    exe "set rtp+=".globpath($GOPATH, "src/github.com/nsf/gocode/vim")
     autocmd FileType go setlocal noexpandtab
     autocmd FileType go setlocal tabstop=4
     autocmd FileType go setlocal shiftwidth=4
