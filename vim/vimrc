@@ -100,6 +100,7 @@ noremap <silent> <Space>uf :exe ":Unite -winheight=15 -path="
 noremap <silent> <Space>ut :exe ":Unite -winheight=15 -path="
     \ . GetGitRoot() . " file -default-action=tabopen"<CR>
 noremap <silent> <Space>ub :Unite buffer<CR>
+noremap <silent> <Space>tt :Unite tab<CR>
 noremap <silent> <Space>up :Unite process<CR>
 noremap <silent> <Space>um :Unite file_mru<CR>
 noremap <silent> <Space>ur :Unite register<CR>
@@ -239,7 +240,8 @@ nnoremap <C-p><C-p> :set paste!<CR>
 set laststatus=2
 nnoremap <Space>e :e ~/.vimrc<CR>
 nnoremap <silent><Space>E :TagbarToggle<CR>
-
+let g:tagbar_left=1
+let g:tagbar_autofocus = 1
 
 "lightline.vim
 let g:lightline = {
@@ -364,7 +366,6 @@ function GetGitRoot() abort
 endfunction
 
 "tab
-noremap <silent> tt :tabnew<CR>
 noremap <silent> tn gt<CR>
 noremap <silent> tp gT<CR>
 
