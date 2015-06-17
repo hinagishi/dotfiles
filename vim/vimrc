@@ -87,6 +87,7 @@ set showmatch
 set showmode
 set tabstop=4
 set textwidth=100
+set ambiwidth=double
 set virtualedit+=block
 set wrap
 set completeopt=menuone
