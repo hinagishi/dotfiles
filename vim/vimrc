@@ -469,4 +469,11 @@ augroup golang
     \ }
 augroup END
 
+augroup titlesettings
+    autocmd!
+    autocmd BufEnter * call system("tmux rename-window " . "'[vim] " . expand("%:t") . "'")
+    autocmd VimLeave * call system("tmux rename-window zsh")
+    autocmd BufEnter * let &titlestring = ' ' . expand("%:t")
+augroup END
+
 set fileencodings=utf-8,iso-2022-jp,cp932,sjis,euc-jp
