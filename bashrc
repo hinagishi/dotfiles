@@ -4,6 +4,8 @@ export LANG=ja_JP.UTF-8
 test -s ~/.alias && . ~/.alias || true
 export PATH=/opt/bin:$PATH
 
+alias tmux='tmux -2 -u'
+
 if [ -e $HOME/.bashrc.local ]
 then
     source $HOME/.bashrc.local
@@ -25,7 +27,7 @@ then
     if [ $? = 0 ];
     then
 	    export TERM=xterm-256color
-	    tmux -2
+        tmux
     fi
 fi
 
