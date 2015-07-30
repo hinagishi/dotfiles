@@ -111,6 +111,8 @@ fi
 alias -s {mp4,avi,wmv,flv,mkv}=mplayer
 alias -s {html,htm}=firefox
 
+alias memo="vim `date '+%Y%m%d'.txt`"
+
 export PATH=$PATH:/opt/apache-ant/bin
 export ANT_HOME=/opt/apache-ant
 
