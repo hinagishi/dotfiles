@@ -11,24 +11,21 @@ then
     source $HOME/.bashrc.local
 fi
 
-if [ $TERM = "screen" ];
+if [ $TERM = "screen" ] || [ $TERM = "screen-256color" ];
 then
     which zsh >& /dev/null
     if [ $? = 0 ];
     then
-	    export TERM=xterm-256color
 	    zsh
     fi
 fi
 
-if [ $TERM = "xterm" ];
+if [ $TERM = "xterm" ] || [ $TERM = "xterm-256color" ];
 then
     which tmux >& /dev/null
     if [ $? = 0 ];
     then
-	    export TERM=xterm-256color
-        tmux
+        tmux -2
     fi
 fi
-
 
