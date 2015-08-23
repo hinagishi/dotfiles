@@ -399,7 +399,7 @@ nnoremap <silent> <Space>tm :TweetVimMentions<CR>
 nnoremap <silent> <Space>ta :Unite tweetvim/account<CR>
 
 "operator
-map <Space>c <Plug>(operator-comment)
+"map <Space>c <Plug>(operator-comment)
 map <Space>u <Plug>(operator-uncomment)
 
 "NERDtree
@@ -481,5 +481,12 @@ augroup titlesettings
     autocmd VimLeave * call system("tmux rename-window zsh")
     autocmd BufEnter * let &titlestring = ' ' . expand("%:t")
 augroup END
+
+let g:cheatsheets_filepath="$HOME/.cheatsheets/"
+function! Cheat()
+    let l:tmp = "sv " . g:cheatsheets_filepath . input("cheat:")
+    exe l:tmp
+endfunction
+nnoremap <Space>c :call Cheat()<CR>
 
 set fileencodings=utf-8,iso-2022-jp,cp932,sjis,euc-jp
