@@ -17,13 +17,11 @@ NeoBundle 'Shougo/vimproc.vim', {
 \}
 NeoBundle 'Shougo/neocomplete.vim'
 NeoBundle 'Shougo/unite.vim'
-"NeoBundle 'Shougo/vimshell.vim'
 NeoBundle 'Shougo/neosnippet.vim'
 NeoBundle 'https://github.com/hinagishi/neosnippet-snippets.git'
 NeoBundle 'https://github.com/hinagishi/wombat256.vim.git'
 NeoBundle 'https://github.com/altercation/vim-colors-solarized.git'
 NeoBundle 'https://github.com/Shougo/unite-ssh.git'
-"NeoBundle 'https://github.com/Shougo/vimfiler.git'
 NeoBundle 'https://github.com/Shougo/unite-build.git'
 NeoBundle 'https://github.com/ujihisa/neco-look.git'
 NeoBundle 'https://github.com/mattn/emmet-vim'
@@ -48,7 +46,6 @@ NeoBundle 'https://github.com/davidhalter/jedi-vim.git', {
 NeoBundle 'https://github.com/nvie/vim-flake8.git', {
             \   "autoload": { "filetypes" : ["python"]}
             \}
-"NeoBundle 'vim-jp/vim-go-extra'
 NeoBundle 'https://github.com/fatih/vim-go.git'
 NeoBundle 'https://github.com/kana/vim-textobj-user.git'
 NeoBundle 'https://github.com/kana/vim-operator-user.git'
@@ -57,10 +54,6 @@ NeoBundle 'https://github.com/kana/vim-textobj-line.git'
 NeoBundle 'https://github.com/kana/vim-textobj-function.git'
 NeoBundle 'https://github.com/thinca/vim-textobj-comment.git'
 NeoBundle 'https://github.com/kana/vim-textobj-indent.git'
-"NeoBundle 'marijnh/tern_for_vim', {
-"\ 'build': {
-"\   'others': 'npm install'
-"\}}
 
 call neobundle#end()
 
@@ -100,7 +93,7 @@ let g:unite_enable_start_insert=0
 noremap <silent> <Space>uf :exe ":Unite -winheight=15 -path="
     \ . GetGitRoot() . " file"<CR>
 noremap <silent> <Space>ut :exe ":Unite -winheight=15 -path="
-    \ . GetGitRoot() . " file -default-action=tabopen"<CR>
+    \ . GetGitRoot() . " -tab file"<CR>
 noremap <silent> <Space>ub :Unite buffer<CR>
 noremap <silent> <Space>tt :Unite tab<CR>
 noremap <silent> <Space>up :Unite process<CR>
@@ -108,8 +101,8 @@ noremap <silent> <Space>um :Unite file_mru<CR>
 noremap <silent> <Space>ur :Unite register<CR>
 noremap <silent> <Space>uo :Unite outline<CR>
 noremap <silent> <Space>ubd :Unite build<CR>
-noremap <silent> <Space><Space> :UniteWithBufferDir file
-            \ -default-action=tabopen<CR>
+noremap <silent> <Space><Space> :UniteWithBufferDir
+            \ -tab file<CR>
 noremap <silent> <Space>un :Unite file/new<CR>
 noremap <silent> <Space>uw :UniteWithBufferDir file<CR>
 augroup unite
