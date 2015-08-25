@@ -25,7 +25,7 @@ then
     which tmux >& /dev/null
     if [ $? = 0 ];
     then
-        tmux -2
+        tmux
     fi
 fi
 
