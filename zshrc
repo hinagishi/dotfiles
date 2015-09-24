@@ -104,7 +104,8 @@ then
     alias mplayer='open -a "/Applications/MPlayerX.app"'
     alias firefox='open -a "/Applications/Firefox.app"'
     alias preview='open -a "/Applications/Preview.app"'
-    alias -s {pdf}=preview
+    alias skim='open -a "/Applications/Skim.app"'
+    alias -s {pdf}=skim
     alias ls="ls -G"
 fi
 
