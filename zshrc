@@ -117,6 +117,8 @@ alias memo="vim `date '+%Y%m%d'.txt`"
 export PATH=$PATH:/opt/apache-ant/bin
 export ANT_HOME=/opt/apache-ant
 
+code () { VSCODE_CWD="$PWD" open -n -b "com.microsoft.VSCode" --args $* ;}
+
 if which pyenv &> /dev/null; then eval "$(pyenv init -)"; fi
 export PYENV_ROOT=$HOME/.pyenv
 
