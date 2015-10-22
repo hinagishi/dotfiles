@@ -152,11 +152,11 @@ endif
 
 
 "emmet-vim (for zen-coding)
-let g:user_emmet_install_global = 0
-augroup emmet
-    autocmd!
-    autocmd FileType html,css EmmetInstall
-augroup END
+"let g:user_emmet_install_global = 0
+"augroup emmet
+"    autocmd!
+"    autocmd FileType html,css EmmetInstall
+"augroup END
 
 "eskk.vim
 set imdisable

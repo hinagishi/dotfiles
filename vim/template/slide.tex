@@ -1,20 +1,37 @@
-\documentclass[dvipdfmx]{beamer}
+\documentclass[17pt,dvipdfmx]{beamer}
 \ifnum 42146=\euc"A4A2
   \AtBeginShipoutFirst{\special{pdf:tounicode EUC-UCS2}}
 \else
   \AtBeginShipoutFirst{\special{pdf:tounicode 90ms-RKSJ-UCS2}}
 \fi
 
-\title{タイトル}
-\author{M. KOHANA}
-\institute[Seikei University]{Seikei University\\Department of Computer and Information Science}
-\date{2000/01/01}
+
+\usepackage{graphicx}
+\usepackage{verbatim}
+
+\usetheme{Madrid}
+\usefonttheme{professionalfonts}
+\useinnertheme{circles}
+
+\useoutertheme[subsection=false]{}
+\setbeamertemplate{footline}[page number]
+
+\title{<`1:TITLE`>}
+\author{<`2:AUTHORS`>}
+\institute[<`3:INST`>]{<`4:FULLINST`>}
+\date{<`5:DATE`>}
 
 \begin{document}
 \frame{\titlepage}
 
-\section{はじめに}
-\begin{frame}{フレームタイトル}
+\section*{Contents}
+\begin{frame}{Contents}
+    \tableofcontents
+\end{frame}
 
+\section{Motivation}
+\begin{frame}{<`6:FRAMETITLE`>}
+    <`7:TARGET`>
 \end{frame}
 \end{document}
+
