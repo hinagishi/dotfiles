@@ -474,6 +474,10 @@ augroup titlesettings
     autocmd BufEnter * let &titlestring = ' ' . expand("%:t")
 augroup END
 
+augroup fzf
+    set runtimepath+=~/repos/src/github.com/junegunn/fzf
+augroup END
+
 let g:cheatsheets_filepath="$HOME/.cheatsheets/"
 function! Cheat()
     let l:tmp = "sv " . g:cheatsheets_filepath . input("cheat:")

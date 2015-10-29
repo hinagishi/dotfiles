@@ -126,3 +126,5 @@ if [ -e $HOME/.zshrc.misc ]
 then
     source $HOME/.zshrc.misc
 fi
+
+[ -f ~/.fzf.zsh ] && source ~/.fzf.zsh
