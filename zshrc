@@ -122,6 +122,17 @@ code () { VSCODE_CWD="$PWD" open -n -b "com.microsoft.VSCode" --args $* ;}
 if which pyenv &> /dev/null; then eval "$(pyenv init -)"; fi
 export PYENV_ROOT=$HOME/.pyenv
 
+function peco-src () {
+    local selected_dir=$(ghq list --full-path | peco --query "$LBUFFER")
+    if [ -n "$selected_dir" ]; then
+        BUFFER="cd ${selected_dir}"
+        zle accept-line
+    fi
+    zle clear-screen
+}
+zle -N peco-src
+bindkey "^N" peco-src
+
 if [ -e $HOME/.zshrc.misc ]
 then
     source $HOME/.zshrc.misc
