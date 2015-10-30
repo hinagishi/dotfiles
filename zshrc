@@ -134,7 +134,8 @@ zle -N peco-src
 bindkey "^N" peco-src
 
 export DICTIONARY=en_US
-export DICPATH=$HOME/.hunspell_dict
+export DICPATH=$HOME/.hunspell_dic
+
 
 if [ -e $HOME/.zshrc.misc ]
 then
