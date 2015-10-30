@@ -133,6 +133,9 @@ function peco-src () {
 zle -N peco-src
 bindkey "^N" peco-src
 
+export DICTIONARY=en_US
+export DICPATH=$HOME/.hunspell_dict
+
 if [ -e $HOME/.zshrc.misc ]
 then
     source $HOME/.zshrc.misc
