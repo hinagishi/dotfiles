@@ -384,12 +384,6 @@ if (exists('+colorcolumn'))
     highlight ColorColumn ctermbg=0
 endif
 
-"tweetvim
-nnoremap <silent> <Space>tl :TweetVimUserStream<CR>
-nnoremap <silent> <Space>tp :TweetVimCommandSay<CR>
-nnoremap <silent> <Space>tm :TweetVimMentions<CR>
-nnoremap <silent> <Space>ta :Unite tweetvim/account<CR>
-
 "operator
 "map <Space>c <Plug>(operator-comment)
 map <Space>u <Plug>(operator-uncomment)
