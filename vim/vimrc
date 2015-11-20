@@ -55,8 +55,6 @@ NeoBundleCheck
 set autoindent
 set autoread
 set backspace=indent,eol,start
-"set cursorcolumn
-"set cursorline
 set expandtab
 set foldmethod=marker
 set hidden
@@ -152,11 +150,11 @@ endif
 
 
 "emmet-vim (for zen-coding)
-"let g:user_emmet_install_global = 0
-"augroup emmet
-"    autocmd!
-"    autocmd FileType html,css EmmetInstall
-"augroup END
+let g:user_emmet_install_global = 0
+augroup emmet
+    autocmd!
+    autocmd FileType html,css EmmetInstall
+augroup END
 
 "eskk.vim
 set imdisable
@@ -359,18 +357,6 @@ noremap <silent> tp gT<CR>
 nnoremap <silent> <Space>gh :GitGutterLineHighlightsToggle<CR>
 
 "let g:indent_guides_enable_on_vim_startup = 1
-
-"flack8
-nnoremap <silent> <Leader>c :call Flake8()<CR>
-
-let g:jedi#completions_enabled = 0
-let g:jedi#auto_vim_configuration = 0
-
-if !exists('g:neocomplete#force_omni_input_patterns')
-    let g:neocomplete#force_omni_input_patterns = {}
-endif
-
-let g:neocomplete#force_omni_input_patterns.python = '\h\w*\|[^. \t]\.\w*'
 
 set t_Co=256
 set background=dark
