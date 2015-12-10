@@ -24,7 +24,6 @@ NeoBundle 'https://github.com/altercation/vim-colors-solarized.git'
 NeoBundle 'https://github.com/Shougo/unite-ssh.git'
 NeoBundle 'https://github.com/Shougo/unite-build.git'
 NeoBundle 'https://github.com/ujihisa/neco-look.git'
-NeoBundle 'https://github.com/tyru/eskk.vim.git'
 NeoBundle 'https://github.com/majutsushi/tagbar.git'
 NeoBundle 'https://github.com/Shougo/unite-outline.git'
 NeoBundle 'haya14busa/incsearch.vim'
@@ -156,47 +155,6 @@ augroup emmet
     autocmd FileType html,css EmmetInstall
 augroup END
 
-"eskk.vim
-set imdisable
-let g:eskk#enable_completion = 1
-imap <C-o> <Plug>(eskk:toggle)
-
-let g:eskk#dictionary = {
-            \ 'path': $HOME . '/.vim/skkdic/skk-jisyo',
-            \ 'sorted': 0,
-            \ 'encoding': 'utf-8'
-            \}
-
-if has('mac')
-    let g:eskk#large_dictionary = {
-                \ 'path': $HOME . '/.vim/skkdic/SKK-JISYO.L',
-                \ 'sorted': 1,
-                \ 'encoding': 'euc-jp'
-                \}
-elseif has('unix')
-    let g:eskk#large_dictionary = {
-                \ 'path': $HOME . '/.vim/skkdic/SKK-JISYO.utf.L',
-                \ 'sorted': 1,
-                \ 'encoding': 'utf-8'
-                \}
-endif
-
-augroup eskk
-    autocmd!
-    autocmd User eskk-initialize-pre call s:eskk_initial_pre()
-    function! s:eskk_initial_pre()
-        let t = eskk#table#new('rom_to_hira*', 'rom_to_hira')
-        call t.add_map(',', ',')
-        call t.add_map('.', '.')
-        call eskk#register_mode_table('hira', t)
-
-        let t = eskk#table#new('rom_to_kata*', 'rom_to_kata')
-        call t.add_map(',', ',')
-        call t.add_map('.', '.')
-        call eskk#register_mode_table('kata', t)
-    endfunction
-augroup END
-
 "incsearch.vim
 map / <Plug>(incsearch-forward)
 map ? <Plug>(incsearch-backward)
@@ -234,7 +192,7 @@ let g:lightline = {
     \ 'mode_map': { 'c': 'NORMAL'},
     \ 'active': {
     \   'left': [ ['mode', 'paste'],
-    \           ['fugitive', 'gitgutter', 'filename', 'filetype', 'eskkmode'] ],
+    \           ['fugitive', 'gitgutter', 'filename', 'filetype'] ],
     \   'right': [ ['lineinfo'],
     \              ['percent'],
     \              ['fileformat', 'fileencoding'] ]
@@ -248,7 +206,6 @@ let g:lightline = {
     \   'filetype': 'MyFiletype',
     \   'fileencoding': 'MyFileencoding',
     \   'mode': 'MyMode',
-    \   'eskkmode': 'GetEskkMode',
     \   'gitgutter': 'MyGitGutter'
     \ }
     \ }
@@ -295,10 +252,6 @@ endfunction
 
 function! MyMode()
     return winwidth(0) > 70 ? lightline#mode() : ''
-endfunction
-
-function! GetEskkMode()
-    return eskk#is_enabled() ? eskk#get_mode() : ''
 endfunction
 
 function! MyGitGutter()
