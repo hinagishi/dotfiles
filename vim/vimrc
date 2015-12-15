@@ -18,33 +18,39 @@ NeoBundle 'Shougo/vimproc.vim', {
 NeoBundle 'Shougo/neocomplete.vim'
 NeoBundle 'Shougo/unite.vim'
 NeoBundle 'Shougo/neosnippet.vim'
-NeoBundle 'https://github.com/hinagishi/neosnippet-snippets.git'
-NeoBundle 'https://github.com/hinagishi/wombat256.vim.git'
-NeoBundle 'https://github.com/altercation/vim-colors-solarized.git'
-NeoBundle 'https://github.com/Shougo/unite-ssh.git'
-NeoBundle 'https://github.com/Shougo/unite-build.git'
-NeoBundle 'https://github.com/ujihisa/neco-look.git'
-NeoBundle 'https://github.com/majutsushi/tagbar.git'
-NeoBundle 'https://github.com/Shougo/unite-outline.git'
+NeoBundle 'Shougo/unite-build.git'
+NeoBundle 'Shougo/unite-outline.git'
+NeoBundle 'kana/vim-textobj-user.git'
+NeoBundle 'kana/vim-operator-user.git'
+NeoBundle 'kana/vim-textobj-line.git'
+NeoBundle 'kana/vim-textobj-function.git'
+NeoBundle 'kana/vim-textobj-indent.git'
+NeoBundle 'hinagishi/neosnippet-snippets.git'
+NeoBundle 'hinagishi/wombat256.vim.git'
+NeoBundle 'altercation/vim-colors-solarized.git'
+NeoBundle 'ujihisa/neco-look.git'
+NeoBundle 'majutsushi/tagbar.git'
 NeoBundle 'haya14busa/incsearch.vim'
-NeoBundle 'https://github.com/bronson/vim-trailing-whitespace.git'
+NeoBundle 'bronson/vim-trailing-whitespace.git'
 NeoBundle 'itchyny/lightline.vim'
 NeoBundle 'tpope/vim-fugitive'
 NeoBundle 'airblade/vim-gitgutter'
-NeoBundle 'tomtom/tcomment_vim'
-NeoBundle 'https://github.com/mattn/webapi-vim.git'
-NeoBundle 'https://github.com/tyru/open-browser.vim.git'
-NeoBundle 'https://github.com/vim-scripts/gtags.vim.git'
-NeoBundle 'nathanaelkane/vim-indent-guides'
-NeoBundle 'https://github.com/fatih/vim-go.git'
-NeoBundle 'https://github.com/kana/vim-textobj-user.git'
-NeoBundle 'https://github.com/kana/vim-operator-user.git'
-NeoBundle 'https://github.com/emonkak/vim-operator-comment.git'
-NeoBundle 'https://github.com/kana/vim-textobj-line.git'
-NeoBundle 'https://github.com/kana/vim-textobj-function.git'
-NeoBundle 'https://github.com/thinca/vim-textobj-comment.git'
-NeoBundle 'https://github.com/kana/vim-textobj-indent.git'
+NeoBundle 'vim-scripts/gtags.vim.git'
+NeoBundle 'fatih/vim-go.git'
+NeoBundle 'emonkak/vim-operator-comment.git'
+NeoBundle 'thinca/vim-textobj-comment.git'
 NeoBundle 'scrooloose/nerdtree'
+NeoBundle 'rust-lang/rust.vim'
+NeoBundleLazy 'phildawes/racer', {
+        \   'build' : {
+        \     'mac'  : 'cargo build --release',
+        \     'unix' : 'cargo build --release',
+        \   },
+        \   'autoload' : {
+        \     'filetypes' : 'rust',
+        \   },
+        \ }
+NeoBundle 'rhysd/rust-doc.vim'
 
 call neobundle#end()
 
@@ -159,19 +165,6 @@ augroup END
 map / <Plug>(incsearch-forward)
 map ? <Plug>(incsearch-backward)
 map g/ <Plug>(incsearch-stay)
-
-"template settings
-augroup template
-    autocmd!
-    autocmd BufNewFile *.html 0r $HOME/.vim/template/html.txt
-    autocmd BufNewFile *.c 0r $HOME/.vim/template/c.txt
-    autocmd BufNewFile *.cpp 0r $HOME/.vim/template/cpp.txt
-    "autocmd BufNewFile *.tex 0r $HOME/.vim/template/report.tex
-    autocmd BufNewFile *.tex 0r $HOME/.vim/template/slide.tex
-    autocmd BufNewFile *.java 0r $HOME/.vim/template/java.txt
-    autocmd BufNewFile *.go 0r $HOME/.vim/template/go.txt
-augroup END
-
 
 if neobundle#tap('vim-trailing-whitespace')
     let g:extra_whitespace_ignored_filetypes = ['unite']
@@ -371,6 +364,13 @@ augroup golang
     let g:go_highlight_functions = 1
     let g:go_highlight_build_constraints = 1
 augroup END
+
+augroup rust
+    autocmd!
+augroup END
+let g:rustfmt_autosave = 1
+let g:rustfmt_command = '$HOME/.cargo/bin/rustfmt'
+
 
 augroup titlesettings
     autocmd!
