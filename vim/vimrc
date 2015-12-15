@@ -41,16 +41,8 @@ NeoBundle 'emonkak/vim-operator-comment.git'
 NeoBundle 'thinca/vim-textobj-comment.git'
 NeoBundle 'scrooloose/nerdtree'
 NeoBundle 'rust-lang/rust.vim'
-NeoBundleLazy 'phildawes/racer', {
-        \   'build' : {
-        \     'mac'  : 'cargo build --release',
-        \     'unix' : 'cargo build --release',
-        \   },
-        \   'autoload' : {
-        \     'filetypes' : 'rust',
-        \   },
-        \ }
 NeoBundle 'rhysd/rust-doc.vim'
+NeoBundle 'racer-rust/vim-racer'
 
 call neobundle#end()
 
@@ -365,11 +357,11 @@ augroup golang
     let g:go_highlight_build_constraints = 1
 augroup END
 
-augroup rust
-    autocmd!
-augroup END
 let g:rustfmt_autosave = 1
 let g:rustfmt_command = '$HOME/.cargo/bin/rustfmt'
+set hidden
+let g:racer_cmd = '$HOME/.cargo/bin/racer'
+let $RUST_SRC_PATH="/usr/local/src/rustc-1.5.0/src"
 
 
 augroup titlesettings
