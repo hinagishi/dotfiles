@@ -192,7 +192,9 @@ let g:lightline = {
     \   'fileencoding': 'MyFileencoding',
     \   'mode': 'MyMode',
     \   'gitgutter': 'MyGitGutter'
-    \ }
+    \ },
+      \ 'separator': { 'left': "\u2b80", 'right': "\u2b82" },
+      \ 'subseparator': { 'left': "\u2b81", 'right': "\u2b83" }
     \ }
 
 function! MyModified()
