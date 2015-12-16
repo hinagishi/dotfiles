@@ -135,6 +135,18 @@ bindkey "^N" peco-src
 export DICTIONARY=en_US
 export DICPATH=$HOME/.hunspell_dic
 
+split_vim() {
+    np=`tmux list-panes | wc | awk '{print $1}'`
+    ps -c | sed -e '1d' | awk '{print $4}' | grep tmux &> /dev/null
+    if [ $? = 0 ] && [ $COLUMNS -ge 120 ] && [ $np = 1 ];
+    then
+        tmux split-window -h -p 70 "/usr/local/bin/vim $1"
+    else
+        /usr/local/bin/vim $1
+    fi
+}
+
+alias vim="split_vim $1"
 
 if [ -e $HOME/.zshrc.misc ]
 then
