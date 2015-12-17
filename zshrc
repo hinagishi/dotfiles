@@ -154,6 +154,11 @@ then
 fi
 
 export PATH=$PATH:$HOME/.local/bin
+export PATH=$PATH:$HOME/Library/Python/3.5/bin
+if [ `uname` = "Darwin" ];
+then
+    export POWERLINE=$HOME/Library/Python/3.5/lib/python/site-packages/powerline/bindings/tmux
+fi
 
 tmux has-session &> /dev/null
 if [ $? = 1 ];
