@@ -148,7 +148,13 @@ export PATH=$PATH:$HOME/.local/bin
 export PATH=$PATH:$HOME/Library/Python/3.5/bin
 if [ `uname` = "Darwin" ];
 then
-    export POWERLINE=$HOME/Library/Python/3.5/lib/python/site-packages/powerline/bindings/tmux
+    if [ -e $HOME/Library/Python/3.5/lib/python/site-packages/powerline/bindings/tmux ];
+    then
+        export POWERLINE=$HOME/Library/Python/3.5/lib/python/site-packages/powerline/bindings/tmux
+    elif [ -e $HOME/Library/Python/2.7/lib/python/site-packages/powerline/bindings/tmux ];
+    then
+        export POWERLINE=$HOME/Library/Python/2.7/lib/python/site-packages/powerline/bindings/tmux
+    fi
 elif [ `uname` = "Linux" ];
 then
     export POWERLINE=$HOME/.local/lib/python2.7/site-packages/powerline/bindings/tmux
