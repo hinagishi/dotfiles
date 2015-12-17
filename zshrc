@@ -77,11 +77,6 @@ export LSCOLORS=exfxcxdxbxegedabagacad
 
 export TERM=xterm-256color
 
-if [ -f /usr/local/bin/vim ]
-then
-	alias vim="/usr/local/bin/vim"
-fi
-
 if [ `uname` = "Linux" ];
 then
     alias ls="ls --color=always"
@@ -126,13 +121,19 @@ export DICTIONARY=en_US
 export DICPATH=$HOME/.hunspell_dic
 
 split_vim() {
+    if [ -e /usr/local/bin/vim ];
+    then
+        vimpath="/usr/local/bin/vim"
+    else
+        vimpath="vim"
+    fi
     np=`tmux list-panes | wc | awk '{print $1}'`
     tmux has-session &> /dev/null
     if [ $? = 0 ] && [ $COLUMNS -ge 120 ] && [ $np = 1 ];
     then
-        tmux split-window -h -p 70 "/usr/local/bin/vim $1"
+        tmux split-window -h -p 70 "$vimpath $1"
     else
-        /usr/local/bin/vim $1
+        $vimpath $1
     fi
 }
 
