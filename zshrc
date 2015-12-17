@@ -9,20 +9,10 @@ setopt correct
 setopt list_packed
 setopt nolistbeep
 
-# 補完設定 autoload -U compinit
-#compinit
-
-# 先方予測
-#autoload predict-on
-#predict-on
-
-# コマンド履歴
 HISTFILE=~/.zsh_history
 HISTSIZE=100
 SAVEHIST=100
-# ignore duplication command history list
 setopt hist_ignore_dups
-# share command history data
 setopt share_history
 
 autoload history-search-end
@@ -158,6 +148,9 @@ export PATH=$PATH:$HOME/Library/Python/3.5/bin
 if [ `uname` = "Darwin" ];
 then
     export POWERLINE=$HOME/Library/Python/3.5/lib/python/site-packages/powerline/bindings/tmux
+elif [ `uname` = "Linux" ];
+then
+    export POWERLINE=$HOME/.local/lib/python2.7/site-packages/powerline/bindings/tmux
 fi
 
 tmux has-session &> /dev/null
