@@ -3,6 +3,7 @@ export LANG=ja_JP.UTF-8
 
 test -s ~/.alias && . ~/.alias || true
 export PATH=/opt/bin:$PATH
+export XDG_CONFIG_HOME=$HOME/.config
 
 alias tmux='tmux -2 -u'
 
