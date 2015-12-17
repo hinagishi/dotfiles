@@ -1,3 +1,4 @@
+
 export LANG=ja_JP.UTF-8
 bindkey -v
 autoload colors
@@ -8,9 +9,8 @@ setopt correct
 setopt list_packed
 setopt nolistbeep
 
-# 補完設定
-autoload -U compinit
-compinit
+# 補完設定 autoload -U compinit
+#compinit
 
 # 先方予測
 #autoload predict-on
@@ -137,7 +137,7 @@ export DICPATH=$HOME/.hunspell_dic
 
 split_vim() {
     np=`tmux list-panes | wc | awk '{print $1}'`
-    ps -c | sed -e '1d' | awk '{print $4}' | grep tmux &> /dev/null
+    tmux has-session &> /dev/null
     if [ $? = 0 ] && [ $COLUMNS -ge 120 ] && [ $np = 1 ];
     then
         tmux split-window -h -p 70 "/usr/local/bin/vim $1"
@@ -151,6 +151,14 @@ alias vim="split_vim $1"
 if [ -e $HOME/.zshrc.misc ]
 then
     source $HOME/.zshrc.misc
+fi
+
+export PATH=$PATH:$HOME/.local/bin
+
+tmux has-session &> /dev/null
+if [ $? = 1 ];
+then
+    tmux -2 -u
 fi
 
 [ -f ~/.fzf.zsh ] && source ~/.fzf.zsh

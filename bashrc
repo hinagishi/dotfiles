@@ -11,23 +11,14 @@ then
     source $HOME/.bashrc.local
 fi
 
-if [ $TERM = "screen" ] || [ $TERM = "screen-256color" ];
-then
-    which zsh >& /dev/null
-    if [ $? = 0 ];
-    then
-	    zsh
-    fi
-fi
-
-if [ $TERM = "xterm" ] || [ $TERM = "xterm-256color" ];
-then
-    which tmux >& /dev/null
-    if [ $? = 0 ];
-    then
-        tmux
-    fi
-fi
-
-
 [ -f ~/.fzf.bash ] && source ~/.fzf.bash
+
+which zsh &> /dev/null
+if [ $? = 0 ];
+then
+    if [ $TERM = "xterm" ] || [ $TERM = "xterm-256color" ] || [ $TERM = "screen" ] || [ $TERM = "screen-256color" ];
+    then
+        zsh
+    fi
+fi
+
