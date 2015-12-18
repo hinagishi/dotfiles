@@ -28,6 +28,7 @@ test -f ~/.fzf.zsh && . ~/.fzf.zsh || true
 ###############プロンプトの設定###############
 case ${UID} in
 0)
+  PROMPT=$'%{\e[48;5;31;38;5;255m%} ヽ（o・_・o）ノ %{\e[m%}%{\e[38;5;31m%}  %{\e[m%}% '
   PROMPT2="%B%{${fg[red]}%}%_#%{${reset_color}%}%b "
   SPROMPT="%B%{${fg[red]}%}%r is correct? [n,y,a,e]:%{${reset_color}%}%b "
   [ -n "${REMOTEHOST}${SSH_CONNECTION}" ] &&
