@@ -34,7 +34,7 @@ case ${UID} in
     PROMPT="%{${fg[white]}%}${HOST%%.*} ${PROMPT}"
   ;;
 *)
-  PROMPT=$'%{\e[48;5;31m%} ヽ（o・_・o）ノ %{\e[m%}%{\e[38;5;31m%}  %{\e[m%}% '
+  PROMPT=$'%{\e[48;5;31;38;5;255m%} ヽ（o・_・o）ノ %{\e[m%}%{\e[38;5;31m%}  %{\e[m%}% '
   PROMPT2=$'%{\e[48;5;31m%}%{\e[m%}%{\e[38;5;31m%}  %{\e[m%}% '
   SPROMPT="%{${fg[red]}%}%r is correct? [n,y,a,e]:%{${reset_color}%} "
   [ -n "${REMOTEHOST}${SSH_CONNECTION}" ] &&
