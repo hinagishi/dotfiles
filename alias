@@ -1,0 +1,30 @@
+
+split_vim() {
+    if [ -e /usr/local/bin/vim ];
+    then
+        vimpath="/usr/local/bin/vim"
+    else
+        vimpath="vim"
+    fi
+    np=`tmux list-panes | wc | awk '{print $1}'`
+    tmux has-session &> /dev/null
+    if [ $? = 0 ] && [ $COLUMNS -ge 120 ] && [ $np = 1 ];
+    then
+        tmux split-window -h -p 70 "$vimpath $1"
+    else
+        $vimpath $1
+    fi
+}
+
+alias vim="split_vim $1"
+alias tmux='tmux -2 -u'
+
+if [ `uname` = "Darwin" ];
+then
+    alias mplayer='open -a "/Applications/MPlayerX.app"'
+    alias firefox='open -a "/Applications/Firefox.app"'
+    alias preview='open -a "/Applications/Preview.app"'
+    alias skim='open -a "/Applications/Skim.app"'
+    alias -s {pdf}=skim
+    alias ls="ls -G"
+fi

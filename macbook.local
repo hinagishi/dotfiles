@@ -1,0 +1,4 @@
+
+export POWERLINE=$HOME/Library/Python/3.5/lib/python/site-packages/powerline/bindings/tmux
+export PATH=$PATH:$HOME/Library/Python/3.5/bin
+

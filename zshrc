@@ -1,4 +1,3 @@
-
 export LANG=ja_JP.UTF-8
 bindkey -v
 autoload colors
@@ -21,7 +20,10 @@ zle -N history-beginning-search-forward-end history-search-end
 bindkey "^P" history-beginning-search-backward-end
 bindkey "^N" history-beginning-search-forward-end
 
+alias -s {mp4,avi,wmv,flv,mkv}=mplayer
+alias -s {html,htm}=firefox
 
+test -f ~/.fzf.zsh && . ~/.fzf.zsh || true
 
 ###############プロンプトの設定###############
 case ${UID} in
@@ -60,51 +62,8 @@ screen*|ansi*)
     ;;
 esac
 
-###############他の設定ファイルを読み込む###############
-
-#文字コード、$PATH,$MANPATH,その他のエイリアスは分離
-
-[ -f ~/.zshrc.mine ] && source ~/.zshrc.mine
-if [[ -s $HOME/.rvm/scripts/rvm ]] ; then source $HOME/.rvm/scripts/rvm ; fi
-
-fpath=($HOME/.zsh_completions/src $fpath)
-
-###############色の設定##################
-LS_COLORS='no=00:fi=00:di=01;34:ln=01;36:pi=40;33:so=01;35:bd=40;33;01:cd=40;33;01:ex=01;30;32:*.tar.gz=01;31;33:*.tgz=01;31;33:*.tar.bz2=01;31;33:*.zip=01;31;33:*.rar=01;31;33'
-export LS_COLORS
-
-export LSCOLORS=exfxcxdxbxegedabagacad
-
-export TERM=xterm-256color
-
-if [ `uname` = "Linux" ];
-then
-    alias ls="ls --color=always"
-fi
 
 
-if [ `uname` = "Darwin" ];
-then
-    alias mplayer='open -a "/Applications/MPlayerX.app"'
-    alias firefox='open -a "/Applications/Firefox.app"'
-    alias preview='open -a "/Applications/Preview.app"'
-    alias skim='open -a "/Applications/Skim.app"'
-    alias -s {pdf}=skim
-    alias ls="ls -G"
-fi
-
-alias -s {mp4,avi,wmv,flv,mkv}=mplayer
-alias -s {html,htm}=firefox
-
-alias memo="vim `date '+%Y%m%d'.txt`"
-
-export PATH=$PATH:/opt/apache-ant/bin
-export ANT_HOME=/opt/apache-ant
-
-code () { VSCODE_CWD="$PWD" open -n -b "com.microsoft.VSCode" --args $* ;}
-
-if which pyenv &> /dev/null; then eval "$(pyenv init -)"; fi
-export PYENV_ROOT=$HOME/.pyenv
 
 function peco-src () {
     local selected_dir=$(ghq list --full-path | peco --query "$LBUFFER")
@@ -117,53 +76,9 @@ function peco-src () {
 zle -N peco-src
 bindkey "^N" peco-src
 
-export DICTIONARY=en_US
-export DICPATH=$HOME/.hunspell_dic
-
-split_vim() {
-    if [ -e /usr/local/bin/vim ];
-    then
-        vimpath="/usr/local/bin/vim"
-    else
-        vimpath="vim"
-    fi
-    np=`tmux list-panes | wc | awk '{print $1}'`
-    tmux has-session &> /dev/null
-    if [ $? = 0 ] && [ $COLUMNS -ge 120 ] && [ $np = 1 ];
-    then
-        tmux split-window -h -p 70 "$vimpath $1"
-    else
-        $vimpath $1
-    fi
-}
-
-alias vim="split_vim $1"
-
-if [ -e $HOME/.zshrc.misc ]
-then
-    source $HOME/.zshrc.misc
-fi
-
-export PATH=$PATH:$HOME/.local/bin
-export PATH=$PATH:$HOME/Library/Python/3.5/bin
-if [ `uname` = "Darwin" ];
-then
-    if [ -e $HOME/Library/Python/3.5/lib/python/site-packages/powerline/bindings/tmux ];
-    then
-        export POWERLINE=$HOME/Library/Python/3.5/lib/python/site-packages/powerline/bindings/tmux
-    elif [ -e $HOME/Library/Python/2.7/lib/python/site-packages/powerline/bindings/tmux ];
-    then
-        export POWERLINE=$HOME/Library/Python/2.7/lib/python/site-packages/powerline/bindings/tmux
-    fi
-elif [ `uname` = "Linux" ];
-then
-    export POWERLINE=$HOME/.local/lib/python2.7/site-packages/powerline/bindings/tmux
-fi
-
 tmux has-session &> /dev/null
 if [ $? = 1 ];
 then
     tmux -2 -u
 fi
 
-[ -f ~/.fzf.zsh ] && source ~/.fzf.zsh
