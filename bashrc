@@ -7,9 +7,7 @@ export LSCOLORS=exfxcxdxbxegedabagacad
 export DICTIONARY=en_US
 export DICPATH=$HOME/.hunspell_dic
 
-test -s ~/.alias && . ~/.alias || true
 test -s ~/.proxyrc && . ~/.proxyrc || true
-test -s ~/.localrc && . ~/.localrc || true
 test -f ~/.fzf.bash && . ~/.fzf.bash || true
 
 which zsh &> /dev/null

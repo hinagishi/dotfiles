@@ -20,23 +20,22 @@ zle -N history-beginning-search-forward-end history-search-end
 bindkey "^P" history-beginning-search-backward-end
 bindkey "^N" history-beginning-search-forward-end
 
-alias -s {mp4,avi,wmv,flv,mkv}=mplayer
-alias -s {html,htm}=firefox
 
+test -s ~/.alias && . ~/.alias || true
+test -s ~/.localrc && . ~/.localrc || true
 test -f ~/.fzf.zsh && . ~/.fzf.zsh || true
 
 ###############プロンプトの設定###############
 case ${UID} in
 0)
-  PROMPT="%B%{${fg[red]}%}%/#%/%n{${reset_color}%}%b "
   PROMPT2="%B%{${fg[red]}%}%_#%{${reset_color}%}%b "
   SPROMPT="%B%{${fg[red]}%}%r is correct? [n,y,a,e]:%{${reset_color}%}%b "
   [ -n "${REMOTEHOST}${SSH_CONNECTION}" ] &&
     PROMPT="%{${fg[white]}%}${HOST%%.*} ${PROMPT}"
   ;;
 *)
-  PROMPT="%{${fg[red]}%}[ %n%% ]%{${reset_color}%} "
-  PROMPT2="%{${fg[red]}%}%_%%%{${reset_color}%} "
+  PROMPT=$'%{\e[48;5;31m%} ヽ（o・_・o）ノ %{\e[m%}%{\e[38;5;31m%}  %{\e[m%}% '
+  PROMPT2=$'%{\e[48;5;31m%}%{\e[m%}%{\e[38;5;31m%}  %{\e[m%}% '
   SPROMPT="%{${fg[red]}%}%r is correct? [n,y,a,e]:%{${reset_color}%} "
   [ -n "${REMOTEHOST}${SSH_CONNECTION}" ] &&
     PROMPT="%{${fg[white]}%}${HOST%%.*} ${PROMPT}"
