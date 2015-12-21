@@ -145,14 +145,6 @@ if v:version >= 703
     endfunction
 endif
 
-
-"emmet-vim (for zen-coding)
-let g:user_emmet_install_global = 0
-augroup emmet
-    autocmd!
-    autocmd FileType html,css EmmetInstall
-augroup END
-
 "incsearch.vim
 map / <Plug>(incsearch-forward)
 map ? <Plug>(incsearch-backward)
