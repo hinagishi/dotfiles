@@ -43,6 +43,7 @@ NeoBundle 'scrooloose/nerdtree'
 NeoBundle 'rust-lang/rust.vim'
 NeoBundle 'rhysd/rust-doc.vim'
 NeoBundle 'racer-rust/vim-racer'
+NeoBundle 'kmnk/vim-unite-giti'
 
 call neobundle#end()
 
