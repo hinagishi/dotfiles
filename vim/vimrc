@@ -84,15 +84,15 @@ noremap <silent> <Space>ut :exe ":Unite -winheight=15 -path="
     \ . GetGitRoot() . " -tab file"<CR>
 noremap <silent> <Space>ub :Unite buffer<CR>
 noremap <silent> <Space>tt :Unite tab<CR>
-noremap <silent> <Space>up :Unite process<CR>
-noremap <silent> <Space>um :Unite file_mru<CR>
-noremap <silent> <Space>ur :Unite register<CR>
 noremap <silent> <Space>uo :Unite outline<CR>
 noremap <silent> <Space>ubd :Unite build<CR>
 noremap <silent> <Space><Space> :UniteWithBufferDir
             \ -tab file<CR>
 noremap <silent> <Space>un :Unite file/new<CR>
 noremap <silent> <Space>uw :UniteWithBufferDir file<CR>
+noremap <silent> <Space>gb :Unite giti/branch<CR>
+noremap <silent> <Space>gs :Unite giti/status<CR>
+noremap <silent> <Space>gl :Unite giti/log<CR>
 augroup unite
     autocmd!
     autocmd FileType unite nnoremap <silent> <buffer> <ESC><ESC> :q<CR>
