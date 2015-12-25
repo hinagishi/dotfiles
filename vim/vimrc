@@ -90,9 +90,10 @@ noremap <silent> <Space><Space> :UniteWithBufferDir
             \ -tab file<CR>
 noremap <silent> <Space>un :Unite file/new<CR>
 noremap <silent> <Space>uw :UniteWithBufferDir file<CR>
+
 noremap <silent> <Space>gb :Unite giti/branch<CR>
-noremap <silent> <Space>gs :Unite giti/status<CR>
 noremap <silent> <Space>gl :Unite giti/log<CR>
+noremap <silent> <Space>gs :Gstatus<CR>
 augroup unite
     autocmd!
     autocmd FileType unite nnoremap <silent> <buffer> <ESC><ESC> :q<CR>
