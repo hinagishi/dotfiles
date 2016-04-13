@@ -75,6 +75,36 @@ function peco-src () {
 }
 zle -N peco-src
 bindkey "^N" peco-src
+alias -g B='`git branch | peco | sed -e "s/^\*[ ]*//g"`'
+
+function peco-select-history() {
+    typeset tac
+    if which tac > /dev/null; then
+        tac=tac
+    else
+        tac='tail -r'
+    fi
+    BUFFER=$(fc -l -n 1 | eval $tac | peco --query "$LBUFFER")
+    CURSOR=$#BUFFER
+    zle redisplay
+}
+zle -N peco-select-history
+bindkey '^r' peco-select-history
+
+function peco-find-file() {
+    if git rev-parse 2> /dev/null; then
+        source_files=$(git ls-files)
+    else
+        source_files=$(find . -type f)
+    fi
+    selected_files=$(echo $source_files | peco --prompt "[find file]")
+
+    BUFFER="${BUFFER}`echo $selected_files | tr '\n' ' '`"
+    CURSOR=$#BUFFER
+    zle redisplay
+}
+zle -N peco-find-file
+bindkey '^f' peco-find-file
 
 tmux has-session &> /dev/null
 if [ $? = 1 ];
