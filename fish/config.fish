@@ -1,4 +1,9 @@
 if not test $TMUX
+    if test (uname) = "Darwin"
+        set -x PATH $PATH $HOME/Library/Python/2.7/bin
+        set -x POWERLINE $HOME/Library/Python/2.7/lib/python/site-packages/powerline/bindings/tmux
+    end
+
     tmux -2
 end
 
