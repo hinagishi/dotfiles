@@ -2,3 +2,9 @@
 export POWERLINE=$HOME/Library/Python/3.5/lib/python/site-packages/powerline/bindings/tmux
 export PATH=$PATH:$HOME/Library/Python/3.5/bin
 
+export GOROOT=/usr/local/go
+export GOPATH=$HOME/repos
+
+export PATH=$PATH:$GOROOT/bin
+export PATH=$PATH:$GOPATH/bin
+
