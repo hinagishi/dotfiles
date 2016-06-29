@@ -1,12 +1,5 @@
+init_powerline
 if not test $TMUX
-    if test (uname) = "Darwin"
-        set -x PATH $PATH $HOME/Library/Python/2.7/bin
-        set -x POWERLINE $HOME/Library/Python/2.7/lib/python/site-packages/powerline/bindings/tmux
-    else if test (uname) = "Linux"
-        set -x POWERLINE $HOME/.local/lib/python2.7/site-packages/powerline/bindings/tmux
-        set -x PATH $PATH $HOME/.local/bin
-    end
-
     tmux -2
 end
 
