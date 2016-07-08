@@ -1,3 +1,5 @@
+set -x LANG ja_JP.UTF-8
+set -x LC_ALL ja_JP.UTF-8
 if test (uname) = "Darwin"
     if test -e $HOME/Library/Python/2.7/lib/python/site-packages/powerline/bindings/tmux
         set -x POWERLINE $HOME/Library/Python/2.7/lib/python/site-packages/powerline/bindings/tmux
@@ -9,11 +11,12 @@ if test (uname) = "Darwin"
 else if test (uname) = "Linux"
     echo "linux"
     if test -e $HOME/.local/lib/python2.7/site-packages/powerline/bindings/tmux
-        echo "set val"
         set -x POWERLINE $HOME/.local/lib/python2.7/site-packages/powerline/bindings/tmux
         set -x PATH $PATH $HOME/.local/bin
     end
 end
+
+set -x PATH $PATH $HOME/.cargo/bin
 
 if not test $TMUX
     tmux -2

@@ -44,6 +44,8 @@ NeoBundle 'rust-lang/rust.vim'
 NeoBundle 'rhysd/rust-doc.vim'
 NeoBundle 'racer-rust/vim-racer'
 NeoBundle 'kmnk/vim-unite-giti'
+NeoBundle 'pangloss/vim-javascript'
+NeoBundle 'mxw/vim-jsx'
 
 call neobundle#end()
 
@@ -338,7 +340,7 @@ augroup golang
 augroup END
 
 let g:rustfmt_autosave = 1
-let g:rustfmt_command = '$HOME/.cargo/bin/rustfmt'
+let g:rustfmt_command = '$HOME/.cargo/bin/rustfmt --write-mode overwrite'
 set hidden
 let g:racer_cmd = '$HOME/.cargo/bin/racer'
 let $RUST_SRC_PATH="/usr/local/src/rustc-1.5.0/src"
@@ -350,12 +352,5 @@ augroup titlesettings
     autocmd VimLeave * call system("tmux rename-window zsh")
     autocmd BufEnter * let &titlestring = ' ' . expand("%:t")
 augroup END
-
-let g:cheatsheets_filepath="$HOME/.cheatsheets/"
-function! Cheat()
-    let l:tmp = "sv " . g:cheatsheets_filepath . input("cheat:")
-    exe l:tmp
-endfunction
-nnoremap <Space>c :call Cheat()<CR>
 
 set fileencodings=utf-8,iso-2022-jp,cp932,sjis,euc-jp
