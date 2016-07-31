@@ -337,6 +337,7 @@ augroup golang
     let g:go_highlight_structs = 1
     let g:go_highlight_functions = 1
     let g:go_highlight_build_constraints = 1
+    let g:go_fmt_command = "goimports"
 augroup END
 
 let g:rustfmt_autosave = 1
